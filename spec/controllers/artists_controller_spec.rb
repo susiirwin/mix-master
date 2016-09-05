@@ -35,4 +35,26 @@ RSpec.describe ArtistsController, type: :controller do
       expect(assigns(:artist)).to eq(artist)
     end
   end
+
+  describe "POST #create" do
+    context "with valid params" do
+      it "creates a new artist" do
+        expect {
+          post :create, {:artist => attributes_for(:artist)}
+        }.to change(Artist, :count).by(1)
+      end
+
+      it "assigns a newly created artist as @artist" do
+        post :create, {:artist => attributes_for(:artist)}
+        expect(assigns(:artist)).to be_a(Artist)
+        expect(assigns(:artist)).to be_persisted
+      end
+
+      it "redirects to the created artist" do
+        post :create, {:artist => attributes_for(:artist)}
+        expect(response).to redirect_to(Artist.last)
+      end
+
+    end
+  end
 end
