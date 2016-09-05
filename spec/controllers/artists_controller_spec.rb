@@ -20,4 +20,19 @@ RSpec.describe ArtistsController, type: :controller do
       expect(response).to render_template("show")
     end
   end
+
+  describe "GET #new" do
+    it "assigns a new artist as @artist" do
+      get :new
+      expect(assigns(:artist)).to be_a_new(Artist)
+    end
+  end
+
+  describe "GET #edit" do
+    it "assigns the requested artist as @artist" do
+      artist = create(:artist)
+      get :edit, {:id => artist.to_param}
+      expect(assigns(:artist)).to eq(artist)
+    end
+  end
 end
