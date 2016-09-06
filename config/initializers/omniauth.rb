@@ -1,4 +1,4 @@
-require "omniauth-oauth2"
+require 'omniauth-oauth2'
 
 module OmniAuth
   module Strategies
@@ -6,17 +6,17 @@ module OmniAuth
       option :name, 'spotify'
 
       option :client_options, {
-        site:             'https://api.spotify.com/v1'
-        authorize_token:  'https://accounts.spotify.com/authorize'
-        token_url:        "https://accounts.spotify.com/api/token"
+        site:          'https://api.spotify.com/v1/',
+        authorize_url: 'https://accounts.spotify.com/authorize',
+        token_url:     'https://accounts.spotify.com/api/token'
       }
 
       def info
-        @raw_info ||= acces_token.get('me').parsed
+        @raw_info ||= access_token.get('me').parsed
       end
 
       def callback_url
-        full_host + sctipt_name + callback_path
+        full_host + script_name + callback_path
       end
     end
   end
